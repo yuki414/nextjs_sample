@@ -2,13 +2,17 @@ import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
+import { getAllPostIds } from '../lib/posts'
 
 export async function getStaticProps() {
+  const paths = getAllPostIds()
   const allPostsData = getSortedPostsData()
   return {
     props: {
       allPostsData
-    }
+    },
+    paths,
+    fallback: false
   }
 }
 
